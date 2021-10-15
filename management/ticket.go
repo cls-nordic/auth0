@@ -36,6 +36,12 @@ type Ticket struct {
 
 	// Whether to include the email address as part of the returnUrl in the reset_email (true), or not (false - default).
 	IncludeEmailInRedirect *bool `json:"includeEmailInRedirect,omitempty"`
+
+	// Auth0 client ID. Used to resolve the application's login initiation endpoint.
+	ClientID *string `json:"client_id,omitempty"`
+
+	// Organization identifier
+	OrganizationID *string `json:"organization_id,omitempty"`
 }
 
 type TicketManager struct {
