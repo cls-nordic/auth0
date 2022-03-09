@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -338,9 +339,17 @@ type managementError struct {
 }
 
 func newError(r io.Reader) error {
-	m := &managementError{}
-	err := json.NewDecoder(r).Decode(m)
+	b, err := io.ReadAll(r)
 	if err != nil {
+		return err
+	}
+
+	m := &managementError{}
+	if err := json.Unmarshal(b, m); err != nil {
+		// this should not happen, Auth0 is supposed to return a valid JSON but
+		// it turns out it sometime does not.
+		// let's log that to facilitate debugging.
+		log.Printf("unable to unmarshal response payload: %s", string(b))
 		return err
 	}
 	return m
