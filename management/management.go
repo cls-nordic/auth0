@@ -349,7 +349,7 @@ func newError(r io.Reader) error {
 		// this should not happen, Auth0 is supposed to return a valid JSON but
 		// it turns out it sometime does not.
 		// let's log that to facilitate debugging.
-		log.Printf("unable to unmarshal response payload: %s", string(b))
+		log.Errorf("unable to unmarshal response payload: %s", string(b))
 		return err
 	}
 	return m
