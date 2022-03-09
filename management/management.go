@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
 
+	"github.com/cls-nordic/pkg/log"
 	"golang.org/x/oauth2"
 	"gopkg.in/auth0.v5/internal/client"
 )
